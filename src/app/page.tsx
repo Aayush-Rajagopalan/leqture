@@ -294,7 +294,7 @@ export default function LandingPage() {
       </main>
       <footer className="container flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 ">
         <p className="text-xs text-neutral-500 dark:text-neutral-400">
-          © 2024 Aayush Inc. All rights reserved.
+          © 2024 Aayush Inc. All rights reserved. A Project by Aayush Rajagopalan, Daiwik Dhar and Hamza Anas Al Halabi
         </p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link className="text-xs hover:underline underline-offset-4" href="#">
