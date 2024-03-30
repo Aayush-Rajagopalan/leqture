@@ -57,7 +57,15 @@ const onUploadComplete = async ({
   console.log(createdFile)
 
   try {
-       
+    const createdFile = await db.file.create({
+      data: {
+        key: file.key,
+        name: file.name,
+        userId: metadata.userId,
+        url: `https://utfs.io/f/${file.key}`,
+        uploadStatus: 'PROCESSING',
+      },
+    })
     
     const response = await fetch(
       `https://utfs.io/f/${file.key}`
