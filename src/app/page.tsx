@@ -12,8 +12,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Navbar from "@/components/Navbar";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default function LandingPage() {
+
+  const { getUser } = getKindeServerSession()
+        const user = getUser()
   return (
     <div className="flex bg-background flex-col min-h-screen">
       <Spotlight
@@ -46,7 +50,7 @@ export default function LandingPage() {
                   size: "lg",
                   className: "mt-5",
                 })}
-                href="/dashboard"
+                href={user ? "/dashboard" : "/sign-in"}
                 target="_blank"
               >
                 Get started <ArrowRight className="ml-2 h-5 w-5" />

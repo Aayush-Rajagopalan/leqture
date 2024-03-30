@@ -93,6 +93,11 @@ export const POST = async (req: NextRequest) => {
           'Use the following pieces of context (or previous conversaton if needed) to answer the users question in markdown format.',
       },
       {
+        role: 'system',
+        content:"Ensure that you go step-by-step. Start off with the very first step required to solve the question, and then ask the user how to proceed. Ask questions such that the user is themselves directed to the answer, and provide hints if they're stuck. Make sure not to give the whole answer in one go though."
+
+      },
+      {
         role: 'user',
         content: `Use the following pieces of context (or previous conversaton if needed) to answer the users question in markdown format. \nIf you don't know the answer, just say that you don't know, don't try to make up an answer.
         
@@ -100,10 +105,10 @@ export const POST = async (req: NextRequest) => {
   
   PREVIOUS CONVERSATION:
   ${formattedPrevMessages.map((message) => {
-    if (message.role === 'user')
-      return `User: ${message.content}\n`
-    return `Assistant: ${message.content}\n`
-  })}
+          if (message.role === 'user')
+            return `User: ${message.content}\n`
+          return `Assistant: ${message.content}\n`
+        })}
   
   \n----------------\n
   
