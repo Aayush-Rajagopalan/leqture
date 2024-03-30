@@ -57,8 +57,7 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <ThemeToggle/> 
-                
+
                 <UserAccountNav
                   name={
                     !user.given_name || !user.family_name
