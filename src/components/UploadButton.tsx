@@ -4,8 +4,20 @@ import { useState } from 'react'
 import {
   Dialog,
   DialogContent,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from './ui/dialog'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Button } from './ui/button'
 
 import Dropzone from 'react-dropzone'
@@ -98,26 +110,26 @@ const UploadDropzone = ({
       {({ getRootProps, getInputProps, acceptedFiles }) => (
         <div
           {...getRootProps()}
-          className='border h-64 m-4 border-dashed border-gray-300 rounded-lg'>
+          className='border h-64 m-4 border-dashed rounded-lg'>
           <div className='flex items-center justify-center h-full w-full'>
             <label
               htmlFor='dropzone-file'
-              className='flex flex-col items-center justify-center w-full h-full rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100'>
+              className='flex flex-col items-center justify-center w-full h-full rounded-lg cursor-pointer bg-card '>
               <div className='flex flex-col items-center justify-center pt-5 pb-6'>
-                <Cloud className='h-6 w-6 text-zinc-500 mb-2' />
-                <p className='mb-2 text-sm text-zinc-700'>
+                <Cloud className='h-6 w-6 text-zinc-100 mb-2' />
+                <p className='mb-2 text-sm text-zinc-300'>
                   <span className='font-semibold'>
                     Click to upload
                   </span>{' '}
                   or drag and drop
                 </p>
-                <p className='text-xs text-zinc-500'>
+                <p className='text-xs text-zinc-300'>
                   PDF (up to {isSubscribed ? "16" : "4"}MB)
                 </p>
               </div>
 
               {acceptedFiles && acceptedFiles[0] ? (
-                <div className='max-w-xs bg-white flex items-center rounded-md overflow-hidden outline outline-[1px] outline-zinc-200 divide-x divide-zinc-200'>
+                <div className='max-w-xs bg-card flex items-center rounded-md overflow-hidden outline outline-[1px] outline-zinc-200 '>
                   <div className='px-3 py-2 h-full grid place-items-center'>
                     <File className='h-4 w-4 text-blue-500' />
                   </div>
@@ -161,32 +173,49 @@ const UploadDropzone = ({
   )
 }
 
-const UploadButton = ({
-  isSubscribed,
-}: {
-  isSubscribed: boolean
-}) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
-
+export default function LectureButton({isSubscribed}: {isSubscribed: boolean}) {
+  const [Draweropen, setDrawerOpen] = useState(false);
+  const [Dialogopen, setDialogOpen] = useState(false);
   return (
-    <Dialog
-      open={isOpen}
-      onOpenChange={(v) => {
-        if (!v) {
-          setIsOpen(v)
-        }
-      }}>
-      <DialogTrigger
-        onClick={() => setIsOpen(true)}
-        asChild>
-        <Button>Upload PDF</Button>
-      </DialogTrigger>
-
-      <DialogContent>
-        <UploadDropzone isSubscribed={isSubscribed} />
-      </DialogContent>
-    </Dialog>
-  )
+    <div className="flex items-center gap-2">
+      <div className="hidden md:block">
+        <Dialog open={Dialogopen} onOpenChange={setDialogOpen}>
+          <DialogTrigger asChild>
+            <Button variant={"geist"}>
+              <Cloud className="h-4 w-4 mr-2" /> Upload A Document
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Upload A Document</DialogTitle>
+              
+            </DialogHeader>
+            <UploadDropzone isSubscribed={isSubscribed} />
+          </DialogContent>
+        </Dialog>
+      </div>
+      <div className="block md:hidden">
+        <Drawer open={Draweropen} onOpenChange={setDrawerOpen}>
+          <DrawerTrigger asChild>
+            <Button variant={"geist"}>
+              <Cloud className="h-4 w-4 mr-2" /> Upload A Document
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader className="text-left">
+              <DrawerTitle>Upload A Document</DrawerTitle>
+            </DrawerHeader>
+            <div className="p-4">
+              <UploadDropzone isSubscribed={isSubscribed} />
+            </div>
+            {/* <DrawerFooter className="pt-2">
+              <DrawerClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DrawerClose>
+            </DrawerFooter> */}
+          </DrawerContent>
+        </Drawer>
+      </div>
+    </div>
+  );
 }
-
-export default UploadButton

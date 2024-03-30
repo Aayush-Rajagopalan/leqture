@@ -20,7 +20,7 @@ const Page = async () => {
 
   const subscriptionPlan = await getUserSubscriptionPlan()
 
-  return <Dashboard subscriptionPlan={subscriptionPlan} />
+  return <div className="bg-background"><Dashboard subscriptionPlan={subscriptionPlan} /></div>
 }
 
 export default Page

@@ -50,7 +50,7 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(
               {
                 'bg-blue-600 text-white':
                   message.isUserMessage,
-                'bg-gray-200 text-gray-900':
+                'bg-card text-foreground border-border':
                   !message.isUserMessage,
                 'rounded-br-none':
                   !isNextMessageSamePerson &&
