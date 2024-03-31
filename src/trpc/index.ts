@@ -101,6 +101,7 @@ export const appRouter = router({
               quantity: 1,
             },
           ],
+          allow_promotion_codes: true,
           metadata: {
             userId: userId,
           },
