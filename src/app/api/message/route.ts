@@ -72,7 +72,7 @@ export const POST = async (req: NextRequest) => {
   }));
 
   const response = await openai.chat.completions.create({
-    model: "gpt-4-0125-preview",
+    model: "gpt-3.5-turbo-0125",
     temperature: 0,
     stream: true,
     messages: [
