@@ -81,11 +81,7 @@ export const POST = async (req: NextRequest) => {
         content:
           "Use the following pieces of context (or previous conversaton if needed) to answer the users question in markdown format.",
       },
-      {
-        role: "system",
-        content:
-          "If the prompt is in Arabic, return your response in arabic too.",
-      },
+
       {
         role: "system",
         content:
