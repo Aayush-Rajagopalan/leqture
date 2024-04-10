@@ -72,7 +72,7 @@ export const POST = async (req: NextRequest) => {
   }));
 
   const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo-0125",
+    model: "gpt-4-turbo-2024-04-09",
     temperature: 0,
     stream: true,
     messages: [
@@ -81,7 +81,10 @@ export const POST = async (req: NextRequest) => {
         content:
           "Use the following pieces of context (or previous conversaton if needed) to answer the users question in markdown format.",
       },
-
+      {
+        role: "system",
+        content: "reply in under 70 words",
+      },
       {
         role: "system",
         content:
